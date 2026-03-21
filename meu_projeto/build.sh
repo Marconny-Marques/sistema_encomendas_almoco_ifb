@@ -3,6 +3,6 @@ set -o errexit
 
 pip install -r requirements.txt
 
-# Se o arquivo está na mesma pasta que o build.sh, o comando é esse:
-python manage.py collectstatic --no-input
-python manage.py migrate
+# O caminho real baseado na sua foto:
+python projeto_Almoco/manage.py collectstatic --no-input
+python projeto_Almoco/manage.py migrate
