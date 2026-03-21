@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_projeto_almoco',  # Seu app principal
+    'projeto_Almoco.app_projeto_almoco',  # Seu app principal
 ]
 
 MIDDLEWARE = [
