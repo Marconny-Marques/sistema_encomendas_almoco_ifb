@@ -3,7 +3,7 @@ from django.db import models
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nome_usuario = models.CharField(max_length=255) # CharField é mais performático para nomes curtos
-    email_usuario = models.EmailField(max_length=255) # EmailField já valida o formato do e-mail
+    email_usuario = models.EmailField(max_length=255) # EmailField já valida o formato do e-mail institucional
 
     def __str__(self):
         return self.nome_usuario
