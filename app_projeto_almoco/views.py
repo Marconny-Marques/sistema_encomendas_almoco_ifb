@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages # Importe messages
+from django.utils import timezone
 from .models import Usuario
+from django.contrib import messages # Importe messages
 
 
 def home(request):
@@ -9,28 +10,23 @@ def home(request):
 def usuarios(request):
     # Só salva se o método for POST (envio do formulário)
     if request.method == 'POST':
+        agora = timezone.localtime(timezone.now())
+        limite = agora.replace(hour=9, minute=30, second=0, microsecond=0)
+
+        if agora > limite:
+            messages.error(request, 'O horário limite para encomendas é até às (9:30) já expirou!')
+            return redirect('quantidade_encomendas')
+        
         novo_usuario = Usuario()
         novo_usuario.nome_usuario = request.POST.get('nome_usuario')
         novo_usuario.email_usuario = request.POST.get('email_usuario')
         novo_usuario.save()
 
-    # Recupera todos os usuários independente de ser POST ou GET
-    usuarios_list = {
-        'usuarios': Usuario.objects.all()
+        messages.success(request, 'Encomenda realizada com sucesso!')
+
+
+    context = {
+        'usuarios' : Usuario.objects.all()
     }
+    return render(request, 'usuarios/usuarios.html', context)
 
-    #Agora é só retornar os dados para a pagina de listagem de encomendas
-    return render(request,'usuarios/usuarios.html',usuarios_list)
-
-def criar_encomenda(request):
-    if request.method == 'POST':
-        
-        # Salva no banco de dados
-        # Encomenda.objects.create(nome=nome, ...)
-        
-        # Adiciona a mensagem de sucesso
-        messages.success(request, 'Sua encomenda foi realizada com sucesso!')
-        
-        return redirect('url_da_pagina_do_formulario') 
-    
-    return render(request, 'seu_template.html')
