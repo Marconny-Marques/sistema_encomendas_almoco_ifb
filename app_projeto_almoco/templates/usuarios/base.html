@@ -32,6 +32,21 @@
     <span class="navbar-brand mb-0 h1"> <a style="text-decoration: none;" href="{% url 'home' %}">IFB-Campus Taguatinga</a></span>
         </div>
     </nav>
+
+    <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block conteudo %}
+    {% endblock %}
+    </div>
+
     {% block conteudo %}
 
     {% endblock %}
