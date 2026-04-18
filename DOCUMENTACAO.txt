@@ -1,0 +1,55 @@
+===========================================================
+SISTEMA DE ENCOMENDAS DE ALMOÇO - DOCUMENTAÇÃO DO PROJETO
+===========================================================
+
+1. ESTRUTURA DE PASTAS E ARQUIVOS
+
+/ (Raiz do Projeto)
+├── core/                -> O "Cérebro" do projeto. Contém as configurações.
+│   ├── settings.py      -> Configurações gerais (Banco de dados, Apps instaladas, etc).
+│   ├── urls.py          -> O roteador principal. Define para qual App vai cada link.
+│   ├── wsgi.py/asgi.py  -> Configurações de servidor (usadas no Deploy/Render).
+│   └── __init__.py      -> Indica que esta pasta é um pacote Python.
+│
+├── app_projeto_almoco/  -> A "Funcionalidade" de usuários e encomendas.
+│   ├── migrations/      -> Histórico de alterações no Banco de Dados.
+│   ├── templates/       -> Arquivos HTML da aplicação.
+│   ├── admin.py         -> Configuração do painel de administrador do Django.
+│   ├── models.py        -> Definição das Tabelas do Banco de Dados (Ex: Usuario).
+│   ├── views.py         -> A lógica por trás de cada página (o que acontece ao clicar).
+│   └── tests.py         -> Testes automatizados.
+│
+├── .gitignore           -> Lista o que NÃO deve ir para o GitHub (ex: venv, db.sqlite3).
+├── db.sqlite3           -> Banco de dados local de teste (SQLite).
+├── manage.py            -> Utilitário de linha de comando (runserver, migrate, etc).
+└── requirements.txt     -> Lista de bibliotecas necessárias para o projeto rodar.
+
+2. COMANDOS ESSENCIAIS PARA O TIME
+
+- Iniciar o servidor: 
+  python manage.py runserver
+
+- Atualizar o Banco de Dados após mudar o models.py:
+  python manage.py makemigrations
+  python manage.py migrate
+
+- Atualizar dependências (se alguém instalou algo novo):
+  pip install -r requirements.txt
+
+3. PADRÕES ADOTADOS
+
+- Arquitetura: Padronizamos as configurações dentro da pasta /core para isolar 
+  a lógica da aplicação.
+- Nome de Variáveis: No models.py, usamos 'nome_usuario' e 'email_usuario' 
+  para evitar conflitos com palavras reservadas do sistema.
+- Controle de Versão: Sempre dar 'git status' antes de um 'git push' para 
+  garantir que não está enviando arquivos desnecessários.
+
+4. FLUXO DE TRABALHO (IMPORTANTE)
+
+Sempre que for começar a trabalhar, baixe as atualizações dos colegas:
+1. git fetch origin
+2. git pull origin main
+
+Se houver erro de estrutura após um pull pesado:
+git reset --hard origin/main.
