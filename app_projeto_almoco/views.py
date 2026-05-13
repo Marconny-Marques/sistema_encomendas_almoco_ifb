@@ -15,6 +15,12 @@ def usuarios(request):
 
         email_digitado = request.POST.get('email_usuario')
 
+        # Verifica se é um e-mail institucional pela terminação "edu.br"
+        if not email_digitado.endswith('edu.br'): 
+            messages.error(request, 'utilize o seu e-mail institucional!')
+            return redirect ('home')
+
+
         if agora > limite:
             messages.error(request, 'O horário limite para encomendas é até às (9:30h) já expirou!')
             return redirect('home')
