@@ -4,3 +4,5 @@ venv/
 .venv/
 db.sqlite3
 .vscode/
+.bash_history
+.bash_logout
