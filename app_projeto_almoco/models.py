@@ -4,7 +4,7 @@ from django.utils import timezone
 class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nome_usuario = models.CharField(max_length=255) 
-    email_usuario = models.EmailField(max_length=255) # EmailField valida o formato de e-mail genérico
+    email_usuario = models.EmailField(max_length=255)
     data_encomenda = models.DateField(default=timezone.now)
 
     def __str__(self):
