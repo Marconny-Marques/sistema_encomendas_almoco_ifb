@@ -11,13 +11,13 @@ class Usuario(models.Model):
         return self.nome_usuario
 
 class Encomenda(models.Model):
-    # Relacionamos a encomenda com o seu modelo de Usuario
+    # Relaciona a encomenda com o modelo de Usuario/Aluno
     aluno = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     
     # Registra o dia e hora exatos do pedido
     data_pedido = models.DateTimeField(auto_now_add=True)
     
-    # Campo opcional para observações
+    # Campo para observações
     observacoes = models.TextField(blank=True, null=True)
 
     def __str__(self):

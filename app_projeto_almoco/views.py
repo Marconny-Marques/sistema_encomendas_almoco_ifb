@@ -3,7 +3,6 @@ from django.utils import timezone
 from .models import Usuario
 from django.contrib import messages # Importe messages
 
-
 def home(request):
     return render(request,'usuarios/home.html')
 
