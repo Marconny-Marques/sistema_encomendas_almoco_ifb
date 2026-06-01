@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-t4)bcm^8%aotho#v9$0iz)b1)bm3d*j=b1_udua_=^6rp=y^7'
 DEBUG = True 
 ALLOWED_HOSTS = ['*']
 
-# 3. Definição do App (Caminho para o seu app de almoço)
+# 3. Definição do App (Caminho para o app almoço)
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_projeto_almoco',  # Seu app principal
+    'app_projeto_almoco',  # app principal
 ]
 
 MIDDLEWARE = [
@@ -52,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-# 5. Banco de Dados (Configurado para aceitar o banco do Render ou SQLite local)
+# 5. Banco de Dados (Configurado para aceitar o até o momento os bancos do Render ou SQLite local.)
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
