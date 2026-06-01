@@ -26,6 +26,10 @@ SISTEMA DE ENCOMENDAS DE ALMOÇO - DOCUMENTAÇÃO DO PROJETO
 
 2. COMANDOS ESSENCIAIS PARA O TIME
 
+- instalar o .venv (erro ao iniciar o servidor: import. dj_database_url):
+  python3 -m venv .venv
+  source .venv/bin/activate
+
 - Iniciar o servidor: 
   python manage.py runserver
 

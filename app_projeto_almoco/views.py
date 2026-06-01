@@ -9,29 +9,13 @@ def home(request):
 def usuarios(request):
     # Só salva se o método for POST (envio do formulário)
     if request.method == 'POST':
-        agora = timezone.localtime(timezone.now())
-        limite = agora.replace(hour=9, minute=30, second=0, microsecond=0)
-
         email_digitado = request.POST.get('email_usuario')
 
         # Verifica se é um e-mail institucional pela terminação "edu.br"
         if not email_digitado.endswith('edu.br'): 
-            messages.error(request, 'utilize o seu e-mail institucional!')
+            messages.error(request, 'Utilize o seu e-mail institucional!')
             return redirect ('home')
 
-
-        if agora > limite:
-            messages.error(request, 'O horário limite para encomendas é até às (9:30h) já expirou!')
-            return redirect('home')
-        
-        ja_encomendou = Usuario.objects.filter(
-            email_usuario = email_digitado,
-            data_encomenda = agora.date()
-        ).exists()
-
-        if ja_encomendou:
-            messages.error(request, "Você já realizou uma encomenda. O limite é uma por dia!")
-            return redirect('home')
         
         novo_usuario = Usuario()
         novo_usuario.nome_usuario = request.POST.get('nome_usuario')
@@ -47,3 +31,22 @@ def usuarios(request):
     }
     return render(request, 'usuarios/usuarios.html', context)
 
+#Confirma o almoço de forma independente do login
+def confirmar_almoco(request, id_usuario):
+    if request.method == 'POST':
+         agora = timezone.localtime(timezone.now())
+         limite = agora.replace(hour=9, minute=30, second=0, microsecond=0)
+
+         if agora>limite:
+              messages.error(request, 'O horário limite para confirmar o almoço é até às (9:30h)')
+              return redirect('home')
+         
+         pedido = Usuario.objects.get(id_usuario=id_usuario)
+
+         pedido.pedido_confirmado = not pedido.pedido_confirmado
+         pedido.save()
+
+    if pedido.pedido_confirmado:
+                messages.success(request, 'Pedido confirmado!')
+    else:
+                messages.warning(request, 'Pedido cancelado!')
